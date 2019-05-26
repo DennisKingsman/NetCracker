@@ -22,23 +22,31 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/", "/home","/register").permitAll()
-                .anyRequest().authenticated()
+                    .antMatchers("/", "/home","/register").permitAll()
+                    .anyRequest()
+                    .authenticated()
                 .and()
-                .formLogin()
-                .loginPage("/login")
-                .permitAll()
+                    .formLogin()
+                    .loginPage("/login")
+                    .usernameParameter("name")
+                    .passwordParameter("password")
+                    .loginProcessingUrl("/login")
+                    .failureUrl("/403Page")
+                    .permitAll()
                 .and()
-                .logout()
-                .permitAll();
+                    .logout()
+                    .logoutUrl("/logoutSuccessfulPage")
+                    .permitAll();
     }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+
+
         auth.jdbcAuthentication()
                 .dataSource(dataSource)
                 .passwordEncoder(NoOpPasswordEncoder.getInstance())
-                .usersByUsernameQuery("select username, password, active from usr where username = ? ")
+                .usersByUsernameQuery("select username, password, true from usr where username = ? ")
                 .authoritiesByUsernameQuery("select u.username, ur.roles from usr u inner join user_role ur on u.id  = ur.user_id where u.username = ? "); //take name and role of user
 
     }
