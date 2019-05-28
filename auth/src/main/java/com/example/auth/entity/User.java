@@ -1,6 +1,7 @@
 package com.example.auth.entity;
 
 import javax.persistence.*;
+import java.util.HashMap;
 import java.util.Set;
 
 @Entity
@@ -15,6 +16,8 @@ public class User {
 
     private String password;
 
+    private String email;
+
     private boolean active;
 
     @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
@@ -22,7 +25,26 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Set<Role> roles;
 
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "responsibleUser")
+    private Set<GrowBox> growBoxes;
+
     public User() {
+    }
+
+    public Set<GrowBox> getGrowBoxes() {
+        return growBoxes;
+    }
+
+    public void setGrowBoxes(Set<GrowBox> growBoxes) {
+        this.growBoxes = growBoxes;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public Long getId() {

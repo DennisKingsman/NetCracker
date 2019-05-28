@@ -31,12 +31,19 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .usernameParameter("name")
                     .passwordParameter("password")
                     .loginProcessingUrl("/login")
-                    .failureUrl("/403Page")
+                    .defaultSuccessUrl("/personalAccount")
+                    .failureUrl("/login?error=true")//
                     .permitAll()
                 .and()
                     .logout()
-                    .logoutUrl("/logoutSuccessfulPage")
+                    .logoutUrl("/logout")
+                    .logoutSuccessUrl("/logoutSuccessful")
                     .permitAll();
+
+        // When the user has logged in as XX.
+        // But access a page that requires role YY,
+        // AccessDeniedException will be thrown.
+        http.authorizeRequests().and().exceptionHandling().accessDeniedPage("/403");
     }
 
     @Override
