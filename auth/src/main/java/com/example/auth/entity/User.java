@@ -1,7 +1,7 @@
 package com.example.auth.entity;
 
 import javax.persistence.*;
-import java.util.HashMap;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -9,7 +9,7 @@ import java.util.Set;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String username;
@@ -25,18 +25,10 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Set<Role> roles;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "responsibleUser")
-    private Set<GrowBox> growBoxes;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "responsibleUser", cascade = CascadeType.ALL)
+    private List<GrowBox> growBoxes;
 
     public User() {
-    }
-
-    public Set<GrowBox> getGrowBoxes() {
-        return growBoxes;
-    }
-
-    public void setGrowBoxes(Set<GrowBox> growBoxes) {
-        this.growBoxes = growBoxes;
     }
 
     public String getEmail() {
@@ -85,5 +77,13 @@ public class User {
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
+    }
+
+    public List<GrowBox> getGrowBoxes() {
+        return growBoxes;
+    }
+
+    public void setGrowBoxes(List<GrowBox> growBoxes) {
+        this.growBoxes = growBoxes;
     }
 }

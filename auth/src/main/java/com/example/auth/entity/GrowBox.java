@@ -2,29 +2,34 @@ package com.example.auth.entity;
 
 
 import javax.persistence.*;
-import java.util.Set;
+import java.util.List;
+
 
 @Entity
 @Table(name = "growBoxes")
 public class GrowBox {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
-    private int length;
+    private Integer length;
 
-    private int width;
+    private Integer width;
 
-    private int height;
+    private Integer height;
 
-    private Set<String> plants;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "responsibleGrowBox", cascade = CascadeType.ALL)
+    private List<Plant> plants;
 
-    private Set<String> sensors;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "activeGrowBox", cascade = CascadeType.ALL)
+    private List<Sensor> sensors;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User responsibleUser;
+
+
 
     public GrowBox() {
     }
@@ -37,43 +42,43 @@ public class GrowBox {
         this.id = id;
     }
 
-    public int getLength() {
+    public Integer getLength() {
         return length;
     }
 
-    public void setLength(int length) {
+    public void setLength(Integer length) {
         this.length = length;
     }
 
-    public int getWidth() {
+    public Integer getWidth() {
         return width;
     }
 
-    public void setWidth(int width) {
+    public void setWidth(Integer width) {
         this.width = width;
     }
 
-    public int getHeight() {
+    public Integer getHeight() {
         return height;
     }
 
-    public void setHeight(int height) {
+    public void setHeight(Integer height) {
         this.height = height;
     }
 
-    public Set<String> getPlants() {
+    public List<Plant> getPlants() {
         return plants;
     }
 
-    public void setPlants(Set<String> plants) {
+    public void setPlants(List<Plant> plants) {
         this.plants = plants;
     }
 
-    public Set<String> getSensors() {
+    public List<Sensor> getSensors() {
         return sensors;
     }
 
-    public void setSensors(Set<String> sensors) {
+    public void setSensors(List<Sensor> sensors) {
         this.sensors = sensors;
     }
 
