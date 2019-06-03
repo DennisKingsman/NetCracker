@@ -24,13 +24,5 @@ public class MainController {
         return "home";
     }
 
-    @RequestMapping(value = "/personalAccount", method = RequestMethod.GET)
-    public String personalAccount(Model model, Principal principal){
 
-        User user = userRepo.findByUsername(principal.getName());
-
-        model.addAttribute("userInfo", user.getUsername());
-
-        return "personalAccount";
-    }
 }

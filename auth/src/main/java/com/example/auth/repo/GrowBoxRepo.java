@@ -7,5 +7,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface GrowBoxRepo extends JpaRepository<GrowBox, Long> {
-    List<GrowBox> findAllByUser(User user);
+    List<GrowBox> findByResponsibleUserId(Long userId);
 }
