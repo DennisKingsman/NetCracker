@@ -3,7 +3,7 @@ package com.example.auth.controller;
 import com.example.auth.entity.Role;
 import com.example.auth.entity.User;
 import com.example.auth.entity.UserForm;
-import com.example.auth.repo.UserRepo;
+import com.example.auth.services.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,10 +18,10 @@ import java.util.Collections;
 @Controller
 public class RegisterController {
 
-    private static final Logger logger = LoggerFactory.getLogger(UserForm.class);
+    private static final Logger logger = LoggerFactory.getLogger(RegisterController.class);
 
     @Autowired
-    private UserRepo userRepo;
+    private UserService userService;
 
     @RequestMapping(value = { "/register" }, method = RequestMethod.GET)
     public String showAddPersonPage(Model model) {
@@ -44,7 +44,8 @@ public class RegisterController {
 
         logger.info(personForm.getName());
 
-        User userFromDb = userRepo.findByUsername(personForm.getName());
+        User userFromDb = userService
+                .findSameUser(personForm.getName(), personForm.getEmail());
 
         if(userFromDb != null){
             model.addAttribute("message", "User exists");
@@ -58,7 +59,7 @@ public class RegisterController {
         user.setEmail(personForm.getEmail());
         user.setActive(true);
         user.setRoles(Collections.singleton(Role.USER));
-        userRepo.save(user);
+        userService.saveUser(user);
 
         return "redirect:/login";
     }

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>GrowBoxEdit</title>
+</head>
+<body>
+<!-- Include _menu.html -->
+<th:block th:include="/_menu"></th:block>
+
+<h1>Create or Edit de GrowBox:</h1>
+
+<form th:action="@{'/boxEdit/'+${userId}}"
+      th:object="${box}" method="POST">
+    Length:
+    <input type="number" th:field="*{length}" />
+    <br/>
+    Width:
+    <input type="number" th:field="*{width}" />
+    <br/>
+    Height:
+    <input type="number" th:field="*{height}">
+    <br/>
+    <input type="submit" value="Create" />
+    <a href="#" th:href="@{/}" role="button">Cancel</a>
+</form>
+
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>personalAccount</title>
+</head>
+<body>
+<!-- Include _menu.html -->
+<th:block th:include="/_menu"></th:block>
+
+
+<h2>User Info Page</h2>
+<h3>Welcome : <span th:utext="${userInfo}"></span></h3>
+
+<div>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Length</th>
+                <th>Width</th>
+                <th>Height</th>
+                <th>Plants</th>
+                <th>Sensors</th>
+                <th>Actions</th>
+            </tr>
+        <thead>
+        <tbody>
+            <tr th:each ="box : ${boxes}">
+                <td th:utext="${box.length}">...</td>
+                <td th:utext="${box.width}">...</td>
+                <td th:utext="${box.height}">...</td>
+                <td> <a th:href="@{'/showPlants/'+${box.id}}">Plants</a></td>
+                <td> <a th:href="@{'/showSensors/'+${box.id}}">Sensors</a></td>
+                <td>
+                    <a th:href="@{'/boxEdit/'+${userId}+'/'+${box.id}}">Update</a> |
+                    <a th:href="@{'/delete/'+${userId}+'/'+${box.id}}">Delete</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <br/>
+    <p>
+        <a th:href="@{'/boxEdit/' + ${userId}}">Create GrowBox</a>
+    </p>
+    <br/>
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" value="Sign Out"/>
+    </form>
+</div>
+
+</body>
+</html>
