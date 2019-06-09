@@ -14,7 +14,9 @@ public class Plant {
 
     private Integer num;
 
-    private String status;
+    private Double recommendedTemperature;
+
+    private Double recommendedHumidity;
 
     @ManyToOne
     @JoinColumn(name = "gb_id")
@@ -55,11 +57,19 @@ public class Plant {
         this.num = num;
     }
 
-    public String getStatus() {
-        return status;
+    public Double getRecommendedTemperature() {
+        return recommendedTemperature;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setRecommendedTemperature(Double recommendedTemperature) {
+        this.recommendedTemperature = recommendedTemperature;
+    }
+
+    public Double getRecommendedHumidity() {
+        return recommendedHumidity;
+    }
+
+    public void setRecommendedHumidity(Double recommendedHumidity) {
+        this.recommendedHumidity = recommendedHumidity;
     }
 }

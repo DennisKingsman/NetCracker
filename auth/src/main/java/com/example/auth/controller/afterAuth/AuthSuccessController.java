@@ -2,9 +2,7 @@ package com.example.auth.controller.afterAuth;
 
 import com.example.auth.entity.GrowBox;
 import com.example.auth.entity.User;
-import com.example.auth.entity.UserForm;
 import com.example.auth.exception.ResourceNotFoundException;
-import com.example.auth.repo.GrowBoxRepo;
 import com.example.auth.services.GrowBoxService;
 import com.example.auth.services.UserService;
 import org.slf4j.Logger;
@@ -51,8 +49,8 @@ public class AuthSuccessController {
         if(id != null){
             model.addAttribute("box", growBoxService.findById(id));
         }else {
-            GrowBox box = new GrowBox();
-            box.setResponsibleUser(userService.findById(userId));
+//            GrowBox box = new GrowBox();
+//            box.setResponsibleUser(userService.findById(userId));
             model.addAttribute("box", new GrowBox());
         }
 
@@ -61,11 +59,12 @@ public class AuthSuccessController {
         return "growBoxEdit";
     }
 
-    @RequestMapping(value = "/boxEdit/{userId}", method = RequestMethod.POST)
+    @RequestMapping(value = {"/boxEdit/{userId}", "/boxEdit/{userId}/{id}"}, method = RequestMethod.POST)
     public String growBoxEditForm(Model model, GrowBox growBox,
                                   @PathVariable(name = "userId") Long userId) throws ResourceNotFoundException {
 
         User user = userService.findById(userId);
+
         growBox.setResponsibleUser(user);
         growBoxService.saveBox(growBox);
 

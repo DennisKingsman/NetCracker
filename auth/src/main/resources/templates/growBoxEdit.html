@@ -12,6 +12,7 @@
 
 <form th:action="@{'/boxEdit/'+${userId}}"
       th:object="${box}" method="POST">
+    <input th:type="hidden" name="id" th:field="${box.id}" />
     Length:
     <input type="number" th:field="*{length}" />
     <br/>
@@ -21,7 +22,7 @@
     Height:
     <input type="number" th:field="*{height}">
     <br/>
-    <input type="submit" value="Create" />
+    <input type="submit" value="Edit" />
     <a href="#" th:href="@{/}" role="button">Cancel</a>
 </form>
 

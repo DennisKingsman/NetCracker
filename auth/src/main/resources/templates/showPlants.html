@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>ShowPlants</title>
+</head>
+<body>
+<!-- Include _menu.html -->
+<th:block th:include="/_menu"></th:block>
+
+<h2>Box Plants Info Page</h2>
+
+<div>
+    <table border = "1">
+        <thead>
+            <tr>
+                <th>PlantName</th>
+                <th>Number of Plants</th>
+                <th>Recommended Temperature</th>
+                <th>Recommended Humidity</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="plant : ${plants}">
+                <td th:utext="${plant.plantName}">...</td>
+                <td th:utext="${plant.num}">...</td>
+                <td th:utext="${plant.recommendedTemperature}">...</td>
+                <td th:utext="${plant.recommendedHumidity}">...</td>
+                <td>
+                    <a th:href="@{'/plantEdit/'+${boxId}+'/'+${plant.id}}">Update</a> |
+                    <a th:href="@{'/plantDelete/'+${boxId}+'/'+${plant.id}}">Delete</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<br/>
+<p>
+    <a th:href="@{'/plantEdit/'+${boxId}}">Add plant</a>
+</p>
+</body>
+</html>
