@@ -1,4 +1,4 @@
-package com.example.auth.entity;
+package com.example.auth.entity.user;
 
 public class UserForm {
 

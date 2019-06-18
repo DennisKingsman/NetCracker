@@ -1,4 +1,4 @@
-package com.example.auth.services;
+package com.example.auth.services.boxService;
 
 import com.example.auth.entity.GrowBox;
 import com.example.auth.exception.ResourceNotFoundException;

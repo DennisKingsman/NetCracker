@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>add sensor</title>
+</head>
+<body>
+<!-- Include _menu.html -->
+<th:block th:include="/_menu"></th:block>
+
+<h3>Name ur sensor </h3>
+
+<form th:action="@{'/addSensor/'+${boxId}}"
+      th:object="${sensor}" method="POST">
+    <input th:type="hidden" name="id" th:field="${sensor.id}" />
+    Name:
+    <input type="text" th:field="*{sensorName}" />
+    <br/>
+    <input type="submit" value="add" />
+    <a href="#" th:href="@{/}" role="button">Cancel</a>
+</form>
+
+</body>
+</html>

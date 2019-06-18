@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Show Sensors</title>
+</head>
+<body>
+<!-- Include _menu.html -->
+<th:block th:include="/_menu"></th:block>
+
+<h3>Active sensors in GrowBox № : <span th:utext="${boxId}"></span></h3>
+
+<div>
+    <table border="1">
+        <thead>
+        <tr>
+            <th>Sensor name</th>
+            <th>Value</th>
+            <th>Action</th>
+        </tr>
+        <thead>
+        <tbody>
+        <tr th:each ="sensor : ${sensors}">
+            <td th:utext="${sensor.sensorName}">...</td>
+            <td th:utext="${sensor.value}">...</td>
+            <td>
+                <a th:href="@{'/deleteSensor/'+${boxId}+'/'+${sensor.id}}">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <br/>
+    <table border="1">
+        <thead>
+        <tr>
+            <th>Min temperature</th>
+            <th>Max temperature</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="data : ${plantData}">
+            <td th:utext="${data.minTemperature}">...</td>
+            <td th:utext="${data.maxTemperature}">...</td>
+        </tr>
+        </tbody>
+    </table>
+    <br/>
+    <p>
+        <a th:href="@{'/addSensor/'+${boxId}}">Register new sensor</a>
+    </p>
+    <br>
+    <p>
+        <a href="#" th:href="@{/}" role="button">Cancel</a>
+    </p>
+</div>
+</body>
+</html>

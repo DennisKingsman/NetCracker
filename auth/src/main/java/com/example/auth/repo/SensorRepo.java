@@ -1,6 +1,6 @@
 package com.example.auth.repo;
 
-import com.example.auth.entity.Sensor;
+import com.example.auth.entity.sensor.Sensor;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

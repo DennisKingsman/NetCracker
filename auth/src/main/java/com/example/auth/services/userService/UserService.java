@@ -1,6 +1,6 @@
-package com.example.auth.services;
+package com.example.auth.services.userService;
 
-import com.example.auth.entity.User;
+import com.example.auth.entity.user.User;
 import com.example.auth.exception.ResourceNotFoundException;
 
 public interface UserService {

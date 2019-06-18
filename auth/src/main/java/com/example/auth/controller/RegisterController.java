@@ -1,9 +1,9 @@
 package com.example.auth.controller;
 
-import com.example.auth.entity.Role;
-import com.example.auth.entity.User;
-import com.example.auth.entity.UserForm;
-import com.example.auth.services.UserService;
+import com.example.auth.entity.user.Role;
+import com.example.auth.entity.user.User;
+import com.example.auth.entity.user.UserForm;
+import com.example.auth.services.userService.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

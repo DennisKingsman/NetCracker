@@ -16,6 +16,7 @@
     <table border="1">
         <thead>
             <tr>
+                <th>ID</th>
                 <th>Length</th>
                 <th>Width</th>
                 <th>Height</th>
@@ -26,6 +27,7 @@
         <thead>
         <tbody>
             <tr th:each ="box : ${boxes}">
+                <td th:utext="${box.id}">...</td>
                 <td th:utext="${box.length}">...</td>
                 <td th:utext="${box.width}">...</td>
                 <td th:utext="${box.height}">...</td>

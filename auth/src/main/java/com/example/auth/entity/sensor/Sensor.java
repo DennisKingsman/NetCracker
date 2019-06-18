@@ -1,4 +1,6 @@
-package com.example.auth.entity;
+package com.example.auth.entity.sensor;
+
+import com.example.auth.entity.GrowBox;
 
 import javax.persistence.*;
 
@@ -10,8 +12,10 @@ public class Sensor {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "sensor_name", nullable = false)
     private String sensorName;
 
+    @Column(nullable = false)
     private Integer value;
 
     @ManyToOne

@@ -1,6 +1,6 @@
-package com.example.auth.services;
+package com.example.auth.services.userPlantService;
 
-import com.example.auth.entity.Plant;
+import com.example.auth.entity.plants.Plant;
 import com.example.auth.exception.ResourceNotFoundException;
 
 import java.util.List;

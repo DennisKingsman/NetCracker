@@ -1,6 +1,10 @@
 package com.example.auth.entity;
 
 
+import com.example.auth.entity.plants.Plant;
+import com.example.auth.entity.sensor.Sensor;
+import com.example.auth.entity.user.User;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -13,10 +17,13 @@ public class GrowBox {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
+    @Column(nullable = false)
     private Integer length;
 
+    @Column(nullable = false)
     private Integer width;
 
+    @Column(nullable = false)
     private Integer height;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "responsibleGrowBox", cascade = CascadeType.ALL)

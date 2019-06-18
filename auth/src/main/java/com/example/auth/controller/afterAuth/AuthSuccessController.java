@@ -1,10 +1,10 @@
 package com.example.auth.controller.afterAuth;
 
 import com.example.auth.entity.GrowBox;
-import com.example.auth.entity.User;
+import com.example.auth.entity.user.User;
 import com.example.auth.exception.ResourceNotFoundException;
-import com.example.auth.services.GrowBoxService;
-import com.example.auth.services.UserService;
+import com.example.auth.services.boxService.GrowBoxService;
+import com.example.auth.services.userService.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,8 +49,6 @@ public class AuthSuccessController {
         if(id != null){
             model.addAttribute("box", growBoxService.findById(id));
         }else {
-//            GrowBox box = new GrowBox();
-//            box.setResponsibleUser(userService.findById(userId));
             model.addAttribute("box", new GrowBox());
         }
 
@@ -75,7 +73,7 @@ public class AuthSuccessController {
     }
 
     @RequestMapping(value = "/delete/{userId}/{id}", method = RequestMethod.GET)
-    public String growBoxDelete(Model model, Principal principal,
+    public String growBoxDelete(Model model,
                                 @PathVariable(name = "userId") Long userId,
                                 @PathVariable(name = "id") Long id){
 

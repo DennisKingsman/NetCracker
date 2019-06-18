@@ -8,16 +8,17 @@
 <!-- Include _menu.html -->
 <th:block th:include="/_menu"></th:block>
 
-<h2>Box Plants Info Page</h2>
+<h2>Plants Info Page in GrowBox № : <span th:utext="${boxId}"></span></h2>
 
 <div>
     <table border = "1">
         <thead>
             <tr>
                 <th>PlantName</th>
-                <th>Number of Plants</th>
+                <th>Number of saplings</th>
+                <th>Critical lower temperature</th>
                 <th>Recommended Temperature</th>
-                <th>Recommended Humidity</th>
+                <th>Critical higher temperature</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -25,10 +26,12 @@
             <tr th:each="plant : ${plants}">
                 <td th:utext="${plant.plantName}">...</td>
                 <td th:utext="${plant.num}">...</td>
+                <td th:utext="${plant.criticalLowerTemperature}">...</td>
                 <td th:utext="${plant.recommendedTemperature}">...</td>
-                <td th:utext="${plant.recommendedHumidity}">...</td>
+                <td th:utext="${plant.criticalHigherTemperature}">...</td>
+
                 <td>
-                    <a th:href="@{'/plantEdit/'+${boxId}+'/'+${plant.id}}">Update</a> |
+                    <a th:href="@{'/plantEdit/'+${boxId}+'/'+${plant.id}}">Change the num of saplings</a> |
                     <a th:href="@{'/plantDelete/'+${boxId}+'/'+${plant.id}}">Delete</a>
                 </td>
             </tr>
@@ -37,7 +40,7 @@
 </div>
 <br/>
 <p>
-    <a th:href="@{'/plantEdit/'+${boxId}}">Add plant</a>
+    <a th:href="@{'/plantAdd/'+${boxId}}">Add plant</a>
 </p>
 </body>
 </html>

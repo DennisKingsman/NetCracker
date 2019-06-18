@@ -8,22 +8,13 @@
 <!-- Include _menu.html -->
 <th:block th:include="/_menu"></th:block>
 
-<h1>Add or Edit ur plants:</h1>
+<h1>Change the number of selected sapling: </h1>
 
-<form th:action="@{'/plantEdit/'+${boxId}}"
+<form th:action="@{'/plantEdit/'+${boxId}+'/'+${myPlantId}}"
       th:object="${plant}" method="POST">
     <input th:type="hidden" name="id" th:field="${plant.id}" />
-    Plant name:
-    <input type="text" th:field="*{plantName}" />
-    <br/>
     Number of sapling:
     <input type="number" th:field="*{num}" />
-    <br/>
-    Recommended temperature:
-    <input type="number" th:field="*{recommendedTemperature}">
-    <br/>
-    Recommended humidity:
-    <input type="number" th:field="*{recommendedHumidity}">
     <br/>
     <input type="submit" value="Create" />
     <a href="#" th:href="@{/}" role="button">Cancel</a>

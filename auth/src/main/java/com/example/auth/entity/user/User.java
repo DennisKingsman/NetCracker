@@ -1,6 +1,10 @@
-package com.example.auth.entity;
+package com.example.auth.entity.user;
+
+import com.example.auth.entity.GrowBox;
+import com.example.auth.entity.user.Role;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.Set;
 
@@ -12,10 +16,13 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
     private String username;
 
+    @Column(nullable = false)
     private String password;
 
+    @Column(nullable = false)
     private String email;
 
     private boolean active;
