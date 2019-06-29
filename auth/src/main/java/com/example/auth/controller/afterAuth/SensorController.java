@@ -6,7 +6,6 @@ import com.example.auth.entity.plants.MyPlants;
 import com.example.auth.entity.plants.Plant;
 import com.example.auth.entity.sensor.Sensor;
 import com.example.auth.entity.sensor.SensorNames;
-import com.example.auth.entity.user.User;
 import com.example.auth.exception.ResourceNotFoundException;
 import com.example.auth.services.boxService.GrowBoxService;
 import com.example.auth.services.dataBasePlantsService.MyPlantService;
@@ -23,7 +22,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -55,10 +53,11 @@ public class SensorController {
                              @PathVariable(name = "boxId") Long id) throws ResourceNotFoundException {
         List<Plant> plants = plantService.findByBoxId(id);
         List<Sensor> sensors = sensorService.findByBoxId(id);
-        if(sensors != null) {
+        if(!sensors.isEmpty()) {
             sensors = refreshValues(sensors);
 
-            if(plants != null) {
+            if(!plants.isEmpty()) {
+                logger.info("Plant");
                 BorderTemperature borderTemperature = setBorderTemperature(plants);
                 String email = userService.findUser(principal.getName()).getEmail();
                 logger.info("EMAIL : " + email);
@@ -100,10 +99,6 @@ public class SensorController {
         sensor.setValue(getRandomValue());
         sensorService.saveSansor(sensor);
 
-
-
-//        model.addAttribute("sensors", sensorService.findByBoxId(id));
-//        model.addAttribute("boxId", id);
         return "redirect:/showSensors/" + id;
     }
 
@@ -114,8 +109,6 @@ public class SensorController {
 
         sensorService.deleteSensor(id);
 
-//        model.addAttribute("sensors", sensorService.findByBoxId(boxId));
-//        model.addAttribute("boxId", boxId);
         return "redirect:/showSensors/" + id;
     }
 
@@ -147,6 +140,7 @@ public class SensorController {
                 borderTemperature.getMinTemperature() + " , " +
                 borderTemperature.getMaxTemperature());
         return borderTemperature;
+
     }
 
     private List<Sensor> refreshValues(List<Sensor> sensors){
